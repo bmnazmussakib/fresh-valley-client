@@ -1,0 +1,32 @@
+.nav-menu{
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-left: 20px;
+    color: rgb(43, 43, 43);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: rgb(59, 59, 59);
+}
+
+.nav-menu:hover{
+    color: #71BA58;
+    transition: 0.3s;
+}
+
+.login{
+    background-color: #71BA58;
+}
+.login:hover{
+    background-color: #599246;
+}
+.login:hover{
+    color: #fff;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #71BA58;
+}

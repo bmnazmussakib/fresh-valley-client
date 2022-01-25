@@ -1,0 +1,14 @@
+.addProduct-container{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.add-product-btn{
+    background-color: #203D37;
+    border-color: #203D37;
+}
+
+.add-product-btn:hover{
+    background-color: #2D524A;
+    border-color: #2D524A;
+}

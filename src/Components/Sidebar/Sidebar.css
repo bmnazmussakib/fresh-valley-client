@@ -1,0 +1,61 @@
+.sidebar{
+    background-color: #203D37;
+    color: white;
+    height: 100vh;
+}
+
+.sidebar-logo{
+    text-decoration: none;
+    color: white;
+}
+.sidebar-logo:hover{
+    color: white;
+}
+
+.sidebar-menu{
+
+}
+
+.manage-product{
+    padding: 0 0% 0 18%;
+}
+
+
+ul{
+    padding: 0 0%;
+}
+ul li{
+    list-style: none;
+    display: block;
+
+}
+ul li a{
+    color: white;
+    text-decoration: none;
+    padding: 0 20%;
+}
+ul li :hover{
+    background-color: #2D524A;
+    color: white; 
+    transition: 0.4s;
+}
+
+
+
+/* navbar{
+    padding: 0 0%;
+}
+navbar nav{
+    list-style: none;
+    padding-left: 50px;
+
+}
+navbar nav a{
+    color: white;
+    text-decoration: none;
+    padding: 0 45% 0 20%;
+}
+navbar nav :hover{
+    background-color: #2D524A;
+    color: white; 
+} */

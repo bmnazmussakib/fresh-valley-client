@@ -1,0 +1,9 @@
+.checkout-btn button{
+    background-color: #71BA58;
+    border-color: #71BA58;
+}
+
+.checkout-btn button:hover{
+    background-color: #599246;
+    border-color: #599246;
+}

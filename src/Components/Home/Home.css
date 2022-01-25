@@ -1,0 +1,26 @@
+.price h5{
+    font-size: 1.5rem;
+    color: #71BA58;
+}
+
+.price button{
+    background-color: #71BA58;
+    border-color: #71BA58;
+}
+.price button:hover{
+    background-color: #007837;
+    border-color: #007837;
+}
+
+.price Link{
+    background-color: #71BA58;
+    border-color: #71BA58;
+}
+.price Link:hover{
+    background-color: #007837;
+    border-color: #007837;
+}
+
+.single-card:hover{
+    width: 300px !important;
+}

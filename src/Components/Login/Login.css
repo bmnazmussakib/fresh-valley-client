@@ -1,0 +1,21 @@
+.login-btn{
+    background-color: #71BA58;
+    border-color: #71BA58;
+}
+.login-btn:hover{
+    background-color: #599246;
+    border-color: #599246;
+}
+.google{
+    width: 40%;
+    margin: auto;
+    text-decoration: none;
+    border-radius: 30px;
+    color: #3d3d3d;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.google:hover{
+    color: #71BA58;
+    transition: 0.3s;
+}
