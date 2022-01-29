@@ -9,14 +9,14 @@ const ManageProduct = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4000/manageProduct")
+        fetch("https://valley-app-server.herokuapp.com/manageProduct")
             .then(res => res.json())
             .then(data => setProduct(data));
 
     }, [])
 
     const handleDeleteProduct = (id) => {
-        fetch(`http://localhost:4000/delete/${id}`, {
+        fetch(`https://valley-app-server.herokuapp.com/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -49,7 +49,6 @@ const ManageProduct = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr> */}
                             {product.map(pd =>
                                 <tr>
 
@@ -63,13 +62,7 @@ const ManageProduct = () => {
                                         <a href="#" className="me-3"><RiEdit2Fill className="text-light p-1 fs-2 rounded" style={{ backgroundColor: '#3BC83B' }} /></a>
                                         <button onClick={() => handleDeleteProduct(pd._id)} className=""><FaTrashAlt className="text-light p-1 fs-2 rounded " style={{ backgroundColor: '#FF444A' }} /></button>
                                     </td>
-
-
                                 </tr>)}
-
-
-
-                            {/* </tr> */}
                         </tbody>
                     </table>
                 </div>

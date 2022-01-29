@@ -37,7 +37,14 @@ const Login = () => {
                 const token = credential.accessToken;
                 // console.log(result.user);
                 const { displayName, email, photoURL } = result.user;
-                const signedInUser = { name: displayName, email: email, img: photoURL };
+
+                localStorage.setItem('email', email);
+                localStorage.setItem('displayName', displayName);
+                localStorage.setItem('photoURL', photoURL);
+
+                const signedInUser = { name: localStorage.getItem('displayName'), email: localStorage.getItem('email'), img: localStorage.getItem('photoURL') };
+                console.log(signedInUser);
+                
                 setLoggedInUser(signedInUser);
                 navigate(from);
 

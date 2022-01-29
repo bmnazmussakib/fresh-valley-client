@@ -8,10 +8,11 @@ import { UserContext } from '../../App';
 
 const Header = () => {
 
-    // const {userValue} = useContext(UserContext);
-    // const [loggedInUser, setLoggedInUser] = userValue;
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const { login } = React.useContext(UserContext);
+
+    const [loggedInUserValue, setloggedInUserValue] = login;
+
 
     return (
         <Container>
@@ -25,11 +26,9 @@ const Header = () => {
                             <Link to="/orders" className="nav-menu">ORDERS</Link>
                             <Link to="/admin" className="nav-menu">ADMINS</Link>
                             <Link to="/deals" className="nav-menu">DEALS</Link>
-                            {/* <Link to="/login" className="nav-menu login">LOGIN</Link> */}
-                            {/* {loggedInUser.email ? <Link to="/profile" className="nav-menu"><img src={loggedInUser.img} alt={loggedInUser.name} className="w-50 rounded-circle" /></Link>:<Link to="/login" className="nav-menu login text-light">LOGIN</Link>} */}
-                            {loggedInUser.email ? <Link to="/profile" className="nav-menu">
+                            {loggedInUserValue.email ? <Link to="/profile" className="nav-menu">
                                 <div class="dropdown">
-                                    <img src={loggedInUser.img} alt={loggedInUser.name} className="w-50 rounded-circle dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false"/>
+                                    <img src={loggedInUserValue.img} alt={loggedInUserValue.name} className="w-50 rounded-circle dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false"/>
                                     {/* <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Dropdown button
                                     </button> */}

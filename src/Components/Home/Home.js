@@ -1,17 +1,27 @@
 import { Button } from 'bootstrap';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Home.css';
 import { Card, CardGroup, Container } from 'react-bootstrap';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import Checkout from '../Checkout/Checkout';
+import { UserContext } from '../../App';
+
 
 const Home = () => {
+
+    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    // const [cart, setCart] = useContext(UserContext);
+
+    const { login, cart } = React.useContext(UserContext);
+
+    const [loggedInUserValue, setLoggedInUserValue] = login;
+    const [cartValue, setCartValue] = cart;
 
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4000/manageProduct")
+        fetch("https://valley-app-server.herokuapp.com/manageProduct")
             .then(res => res.json())
             .then(data => setProduct(data));
 
@@ -20,27 +30,40 @@ const Home = () => {
     // console.log(product);
 
 
-    const [cart, setCart] = useState({});
+    // const [cart, setCart] = useState({});
 
     // Add to Cart
     const handleBuyProduct = (id) => {
 
         const findProduct = product.find(pd => pd._id === id);
         // console.log(findProduct);
-        setCart(findProduct);
+        setCartValue(findProduct);
+        console.log(cartValue);
 
-        fetch("http://localhost:4000/checkout", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                cart
-            })
-        })
-        // console.log(id);
+
+        // fetch("https://valley-app-server.herokuapp.com/checkout", {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         cart
+        //     })
+        // })
+
+
+        // fetch("https://valley-app-server.herokuapp.com/checkout", {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         order
+        //     })
+        // })
+
+
 
     }
 
-    console.log("cart: ", cart);
+
+
 
     return (
         <div>
@@ -57,9 +80,9 @@ const Home = () => {
                                         <Card.Title><h5 className="text-center fw-bold">{pd.name} - {pd.weight} KG</h5></Card.Title>
                                         <div className="price d-flex justify-content-evenly mt-4">
                                             <h5 className="d-inline-block fw-bold d-flex align-items-end">$ {pd.price}</h5>
-                                            {/* <Link to="/checkout"> */}
+                                            <Link to="/checkout">
                                                 <button className="btn btn-primary" onClick={() => handleBuyProduct(pd._id)} >Buy Now</button>
-                                            {/* </Link> */}
+                                            </Link>
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -67,9 +90,6 @@ const Home = () => {
                         )
                     })
                     }
-
-
-
                 </CardGroup>
             </Container>
         </div>
