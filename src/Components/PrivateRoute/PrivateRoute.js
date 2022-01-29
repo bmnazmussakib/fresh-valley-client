@@ -6,11 +6,14 @@ import { UserContext } from '../../App';
 
 const PrivateRoute = ({ children}) => {
     
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const { login } = React.useContext(UserContext);
+
+    const [loggedInUserValue, setLoggedInUserValue] = login;
+
     const location = useLocation();
     return (
         <div>
-            { loggedInUser.email ? children: <Navigate to="/login" state= { {from: location }} /> }
+            { loggedInUserValue.email ? children: <Navigate to="/login" state= { {from: location }} /> }
         </div>
     );
 };

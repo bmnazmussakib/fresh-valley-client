@@ -15,9 +15,10 @@ const Checkout = () => {
 
     const [loggedInUserValue, setLoggedInUserValue] = login;
     const [cartValue, setCartValue] = cart;
+
     const [checkoutCart, setCheckoutCart] = useState({});
 
-    fetch("https://valley-app-server.herokuapp.com/checkout", {
+    fetch("http://localhost:4000/checkout", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -26,7 +27,7 @@ const Checkout = () => {
     })
 
     useEffect(() => {
-        fetch('https://valley-app-server.herokuapp.com/checkout')
+        fetch('http://localhost:4000/checkout')
             .then(res => res.json())
             .then(data => setCheckoutCart(data))
     }, []);
@@ -43,9 +44,9 @@ const Checkout = () => {
 
 
 
-    // const totalPrice = (checkoutCart || []).reduce((accumulator, currentValue) => {
-    //     return accumulator + JSON.parse(currentValue.price);
-    // }, 0)
+    const totalPrice = (checkoutCart || []).reduce((accumulator, currentValue) => {
+        return accumulator + JSON.parse(currentValue.price);
+    }, 0)
 
     // console.log("totalPrice: ", totalPrice);
     // console.log("cart: ", cart);
@@ -82,26 +83,26 @@ const Checkout = () => {
                         )}
                     </tbody> */}
 
-                    {/* <tbody>
+                    <tbody>
                         <tr>
                             <td>{checkoutCart[0].name}</td>
                             <td className="text-center">{checkoutCart[0].weight}</td>
                             <td className="text-center">$ {checkoutCart[0].price}</td>
                         </tr>
-                    </tbody> */}
+                    </tbody>
 
-                    <tbody>
+                    {/* <tbody>
                         <tr>
                             <td>aaa</td>
                             <td className="text-center">bbb</td>
                             <td className="text-center">$ 555</td>
                         </tr>
-                    </tbody>
+                    </tbody> */}
 
                     <tfoot>
                         <td colspan="2" className="fw-bolder fs-5">Total</td>
-                        {/* <td className="fw-bolder fs-5 text-center">$ {totalPrice}</td> */}
-                        <td className="fw-bolder fs-5 text-center">$500</td>
+                        <td className="fw-bolder fs-5 text-center">$ {totalPrice}</td>
+                        {/* <td className="fw-bolder fs-5 text-center">$500</td> */}
                     </tfoot>
                 </table>
 

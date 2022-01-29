@@ -9,14 +9,14 @@ const ManageProduct = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        fetch("https://valley-app-server.herokuapp.com/manageProduct")
+        fetch("http://localhost:4000/manageProduct")
             .then(res => res.json())
             .then(data => setProduct(data));
 
     }, [])
 
     const handleDeleteProduct = (id) => {
-        fetch(`https://valley-app-server.herokuapp.com/delete/${id}`, {
+        fetch(`http://localhost:4000/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

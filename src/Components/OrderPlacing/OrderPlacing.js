@@ -14,19 +14,19 @@ const OrderPlacing = () => {
     const [price, setPrice] = useState('');
 
     useEffect(() => {
-        fetch('https://valley-app-server.herokuapp.com/checkout')
+        fetch('http://localhost:4000/checkout')
             .then(res => res.json())
             .then(data => setCartValue(data))
         // .then(data => data.map(data => setCart(data)))
     }, []);
 
-    
+
 
 
     useEffect(() => {
         cart.map(data => setPrice(data.price))
-    },[])
-    console.log("price: ", price, typeof(price));
+    }, [])
+    console.log("price: ", price, typeof (price));
 
     useEffect(() => {
         const orderInfo = { name: loggedInUserValue.name, email: loggedInUserValue.email, time: new Date(), price: price };
@@ -35,13 +35,22 @@ const OrderPlacing = () => {
     }, [])
 
 
-    fetch("https://valley-app-server.herokuapp.com/orderPlacing", {
+    fetch("http://localhost:4000/orderPlacing", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             order
         })
     })
+
+    fetch('http://localhost:4000/delete', {
+        method: 'DELETE'
+    })
+        .then(res => res.json())
+        .then(data => {
+            // Do some stuff...
+        })
+        .catch(err => console.log(err));
 
     return (
         <div>

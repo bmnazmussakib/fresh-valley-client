@@ -21,21 +21,21 @@ function App() {
 
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState({});
-  // const providerValue = { login: [loggedInUser, setLoggedInUser], cart: [cart, setCart] }
+  const providerValue = { login: [loggedInUser, setLoggedInUser], cart: [cart, setCart] }
   
   return (
 
     // <UserContext.Provider value={providerValue}>
-      <UserContext.Provider value={{ login: [loggedInUser, setLoggedInUser], cart: [cart, setCart] }}>
+      <UserContext.Provider value={providerValue}>
       <div>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
             <Route path="/login" element={<Login />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/orderPlacing" element={<OrderPlacing />} />
-            {/* <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} /> */}
+            {/* <Route path="/checkout" element={<Checkout />} /> */}
+            <Route path="/orderPlacing" element={<PrivateRoute><OrderPlacing /></PrivateRoute>} />
+            <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
             {/* <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} /> */}
             <Route path="/admin" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />
             <Route path="/manageProduct" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />

@@ -14,10 +14,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    // const { userValue } = useContext(UserContext);
-    // const [loggedInUser, setLoggedInUser] = userValue;
+    const { login } = React.useContext(UserContext);
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUserValue, setLoggedInUserValue] = login;
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,7 +45,7 @@ const Login = () => {
                 const signedInUser = { name: localStorage.getItem('displayName'), email: localStorage.getItem('email'), img: localStorage.getItem('photoURL') };
                 console.log(signedInUser);
                 
-                setLoggedInUser(signedInUser);
+                setLoggedInUserValue(signedInUser);
                 navigate(from);
 
             }).catch((error) => {

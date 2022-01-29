@@ -21,7 +21,7 @@ const Home = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        fetch("https://valley-app-server.herokuapp.com/manageProduct")
+        fetch("http://localhost:4000/manageProduct")
             .then(res => res.json())
             .then(data => setProduct(data));
 
@@ -41,7 +41,7 @@ const Home = () => {
         console.log(cartValue);
 
 
-        // fetch("https://valley-app-server.herokuapp.com/checkout", {
+        // fetch("http://localhost:4000/checkout", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({
@@ -50,7 +50,7 @@ const Home = () => {
         // })
 
 
-        // fetch("https://valley-app-server.herokuapp.com/checkout", {
+        // fetch("http://localhost:4000/checkout", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({
@@ -74,7 +74,7 @@ const Home = () => {
                         return (
                             <div className="col-lg-4 col-md-6">
                                 <Card className="m-4 border-0 shadow p-3 mb-5 bg-body rounded single-card">
-                                    <Card.Img variant="top" src="https://i.ibb.co/YPwBmbt/rsz-1rsz-1kisspng-milo-chocolate-milk-coffee-goat-milk-milo-5b35bf811fe6482087426415302490891307.png" className='w-75 m-auto' />
+                                    <Card.Img variant="top" src={pd.imgURL} className='w-75 m-auto py-5' />
 
                                     <Card.Body>
                                         <Card.Title><h5 className="text-center fw-bold">{pd.name} - {pd.weight} KG</h5></Card.Title>

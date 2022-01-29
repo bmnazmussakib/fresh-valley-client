@@ -2,48 +2,88 @@ import React, { useState } from 'react';
 import './AddProduct.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AddProduct = () => {
 
     const navigate = useNavigate();
+
+    const [imgURL, setImgURL] = useState('');
 
     const [product, setProduct] = useState({
         name: "", weight: "", price: ""
     });
     let name, value;
 
+    const productInfo = {...product, imgURL}
+
     const handleInputs = (e) => {
         // console.log(e);
         name = e.target.name;
         value = e.target.value;
+        
 
-        setProduct({...product, [name]:value})
+        setProduct({ ...product, [name]: value })
     }
 
     // Add Product button
     const handleAddProduct = (e) => {
 
-        const {name, weight, price} = product;
+        // const { name, weight, price } = product;
+        // const { img } = imgURL;
 
-        fetch('https://valley-app-server.herokuapp.com/addProduct', {
+        // const productInfo = {...product, imgURL}
+
+        const { name, weight, price, imgURL } = productInfo;
+
+
+        fetch('http://localhost:4000/addProduct', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name, weight, price
+                name, weight, price, imgURL
             })
         })
             .then(res => res.json())
             .then(data => {
                 if (data.status === 422 || !data) {
-                window.alert("Invalid Data")
+                    window.alert("Invalid Data")
                 } else {
                     window.alert("Data insert successfully");
+                    console.log(data);
 
                     navigate.push('/addProduct');
-            }
-        })
+                }
+            })
+
+        console.log(productInfo);
         e.preventDefault();
     }
+
+
+    const handleImageUpload = (event) => {
+        console.log(event.target.files[0]);
+        const imgData = new FormData();
+        imgData.set('key', '9dce04044780a8e8c6cbf435542ead0b');
+        imgData.append('image', event.target.files[0]);
+
+        const requestOptions = {
+            method: 'POST',
+            body: imgData
+        };
+
+        fetch('https://api.imgbb.com/1/upload', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                setImgURL(data.data.display_url)
+                // console.log(data.data.display_url)
+            })
+            .catch(error => {
+                console.error(error)
+            });
+    }
+
+    console.log("imageURL: ", imgURL, typeof(imgURL))
 
     return (
         <div>
@@ -65,7 +105,7 @@ const AddProduct = () => {
 
                             <div class="col-md-6">
                                 <label for="weight" class="form-label">Weight</label>
-                                <input type="text" class="form-control" name="weight" id="weight" onChange={handleInputs} required />
+                                <input type="number" class="form-control" name="weight" id="weight" onChange={handleInputs} required />
                             </div>
                         </div>
 
@@ -75,14 +115,14 @@ const AddProduct = () => {
                                 <input type="number" class="form-control" name="price" id="price" onChange={handleInputs} required />
                             </div>
 
-                            {/* <div class="col-md-6">
+                            <div class="col-md-6">
                                 <label for="uploadImg" class="form-label">Upload Image</label>
-                                <input type="file" class="form-control" id="uploadImg" required />
-                            </div> */}
+                                <input type="file" class="form-control" id="uploadImg" onChange={handleImageUpload} required />
+                            </div>
                         </div>
 
                         <div class="col-12">
-                            <button onClick={handleAddProduct}class="btn btn-primary add-product-btn" type="submit">Add Product</button>
+                            <button onClick={handleAddProduct} class="btn btn-primary add-product-btn" type="submit">Add Product</button>
                         </div>
                     </form>
                 </div>
