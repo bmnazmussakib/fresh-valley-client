@@ -14,6 +14,9 @@ import React from 'react';
 import { useState } from 'react';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import OrderPlacing from './Components/OrderPlacing/OrderPlacing';
+import AddEdit from './Components/AddEdit/AddEdit';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserContext = React.createContext();
 
@@ -22,30 +25,46 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState({});
   const providerValue = { login: [loggedInUser, setLoggedInUser], cart: [cart, setCart] }
-  
+
+
+
   return (
 
     // <UserContext.Provider value={providerValue}>
-      <UserContext.Provider value={providerValue}>
+    <UserContext.Provider value={providerValue}>
+
+
       <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/checkout" element={<Checkout />} /> */}
-            <Route path="/orderPlacing" element={<PrivateRoute><OrderPlacing /></PrivateRoute>} />
-            <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
-            {/* <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} /> */}
-            <Route path="/admin" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />
-            <Route path="/manageProduct" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />
-            <Route path="/addProduct" element={<PrivateRoute><AddProduct /></PrivateRoute>} />
-            <Route path="/editProduct" element={<PrivateRoute><EditProduct /></PrivateRoute>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        
+          <BrowserRouter>
+          <ToastContainer />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+
+
+              <Route path="/login" element={<Login />} />
+
+              {/* <Route path="/checkout" element={<Checkout />} /> */}
+              <Route path="/orderPlacing" element={<PrivateRoute><OrderPlacing /></PrivateRoute>} />
+              <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
+              
+              {/* <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} /> */}
+              <Route path="/admin" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />
+              <Route path="/manageProduct" element={<PrivateRoute><ManageProduct /></PrivateRoute>} />
+
+              {/* <Route path="/addProduct" element={<PrivateRoute><AddProduct /></PrivateRoute>} /> */}
+              <Route path="/addProduct" element={<PrivateRoute><AddEdit /></PrivateRoute>} />
+
+              {/* <Route path="/editProduct" element={<PrivateRoute><EditProduct /></PrivateRoute>} /> */}
+              <Route path="/editProduct/:id" element={<PrivateRoute><AddEdit /></PrivateRoute>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        
       </div>
-    </UserContext.Provider>
+
+    </UserContext.Provider >
   );
 }
 

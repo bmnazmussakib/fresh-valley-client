@@ -3,29 +3,37 @@ import Sidebar from '../Sidebar/Sidebar';
 import './ManageProduct.css';
 import { RiEdit2Fill } from "react-icons/ri";
 import { FaTrashAlt } from "react-icons/fa";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Link, useParams } from 'react-router-dom';
 
 const ManageProduct = () => {
 
+    
+
     const [product, setProduct] = useState([]);
 
+    const loadData = async () => {
+        const response = await axios.get("http://localhost:4000/manageProduct");
+        setProduct(response.data)
+    }
+
     useEffect(() => {
-        fetch("http://localhost:4000/manageProduct")
-            .then(res => res.json())
-            .then(data => setProduct(data));
+
+        loadData();
 
     }, [])
 
     const handleDeleteProduct = (id) => {
-        fetch(`http://localhost:4000/delete/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log("deleted successfully");
-                console.log(data);
-            })
-            .catch(err => console.log(err));
-        // console.log(typeof(id), id)
+        if(window.confirm("Are you sure want delete?")){
+            axios.delete(`http://localhost:4000/delete/${id}`);
+            toast.success("Product Deleted Successfully");
+            setTimeout(()=> loadData(), 500)
+        }
+    }
+
+    const handleUpdate = (id) => {
+        console.log("Update Cliked", id);
     }
 
     return (
@@ -59,8 +67,8 @@ const ManageProduct = () => {
                                     <td>$ {pd.price}</td>
 
                                     <td>
-                                        <a href="#" className="me-3"><RiEdit2Fill className="text-light p-1 fs-2 rounded" style={{ backgroundColor: '#3BC83B' }} /></a>
-                                        <button onClick={() => handleDeleteProduct(pd._id)} className=""><FaTrashAlt className="text-light p-1 fs-2 rounded " style={{ backgroundColor: '#FF444A' }} /></button>
+                                        <Link to={`/editProduct/${pd._id}`}><button onClick={() => handleUpdate(pd._id)} className="btn"><RiEdit2Fill className="text-light p-1 fs-2 rounded" style={{ backgroundColor: '#3BC83B' }} /></button></Link>
+                                        <button onClick={() => handleDeleteProduct(pd._id)} className="btn"><FaTrashAlt className="text-light p-1 fs-2 rounded " style={{ backgroundColor: '#FF444A' }} /></button>
                                     </td>
                                 </tr>)}
                         </tbody>

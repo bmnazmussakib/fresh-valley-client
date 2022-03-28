@@ -14,7 +14,7 @@ const OrderPlacing = () => {
     const [price, setPrice] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:4000/checkout')
+        fetch('https://valley-app-server.herokuapp.com/checkout')
             .then(res => res.json())
             .then(data => setCartValue(data))
         // .then(data => data.map(data => setCart(data)))
@@ -35,7 +35,7 @@ const OrderPlacing = () => {
     }, [])
 
 
-    fetch("http://localhost:4000/orderPlacing", {
+    fetch("https://valley-app-server.herokuapp.com/orderPlacing", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -43,7 +43,7 @@ const OrderPlacing = () => {
         })
     })
 
-    fetch('http://localhost:4000/delete', {
+    fetch('https://valley-app-server.herokuapp.com/delete', {
         method: 'DELETE'
     })
         .then(res => res.json())

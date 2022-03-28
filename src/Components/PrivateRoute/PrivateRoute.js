@@ -4,16 +4,20 @@ import { Navigate, Route, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 
-const PrivateRoute = ({ children}) => {
-    
+const PrivateRoute = ({ children }) => {
+
     const { login } = React.useContext(UserContext);
 
     const [loggedInUserValue, setLoggedInUserValue] = login;
-
+    const token = localStorage.getItem('token');
     const location = useLocation();
     return (
         <div>
-            { loggedInUserValue.email ? children: <Navigate to="/login" state= { {from: location }} /> }
+
+            {/* { loggedInUserValue.email ? children: <Navigate to="/login" state= { {from: location }} /> } */}
+
+            {token ? children : <Navigate to="/login" state={{ from: location }} />}
+
         </div>
     );
 };

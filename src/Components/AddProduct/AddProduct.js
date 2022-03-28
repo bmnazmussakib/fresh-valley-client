@@ -37,6 +37,7 @@ const AddProduct = () => {
         const { name, weight, price, imgURL } = productInfo;
 
 
+        // fetch('https://valley-app-server.herokuapp.com/addProduct', {
         fetch('http://localhost:4000/addProduct', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

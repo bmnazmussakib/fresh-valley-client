@@ -21,6 +21,7 @@ const Home = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
+        // fetch("https://valley-app-server.herokuapp.com/manageProduct")
         fetch("http://localhost:4000/manageProduct")
             .then(res => res.json())
             .then(data => setProduct(data));
@@ -41,7 +42,7 @@ const Home = () => {
         console.log(cartValue);
 
 
-        // fetch("http://localhost:4000/checkout", {
+        // fetch("https://valley-app-server.herokuapp.com/checkout", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({
@@ -50,7 +51,7 @@ const Home = () => {
         // })
 
 
-        // fetch("http://localhost:4000/checkout", {
+        // fetch("https://valley-app-server.herokuapp.com/checkout", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({

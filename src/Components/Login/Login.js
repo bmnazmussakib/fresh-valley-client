@@ -21,23 +21,33 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-
-    const { from } = location.state || { from: { pathname: '/' } };
+    const token = localStorage.getItem('token');
+    const { from } = location.state || { from: { pathname: '/' } }; 
 
 
 
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
+    
+
+    // if(token){
+    //     setTimeout(() => navigate('/'))
+    // }
+
+    
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
+                // console.log(token);
+                localStorage.setItem('token', token);
+
                 // console.log(result.user);
                 const { displayName, email, photoURL } = result.user;
-
+                localStorage.setItem('body', credential);
                 localStorage.setItem('email', email);
                 localStorage.setItem('displayName', displayName);
                 localStorage.setItem('photoURL', photoURL);
@@ -46,7 +56,9 @@ const Login = () => {
                 console.log(signedInUser);
                 
                 setLoggedInUserValue(signedInUser);
+
                 navigate(from);
+                console.log(from);
 
             }).catch((error) => {
                 const errorCode = error.code;

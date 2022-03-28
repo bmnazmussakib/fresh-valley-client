@@ -18,7 +18,7 @@ const Checkout = () => {
 
     const [checkoutCart, setCheckoutCart] = useState({});
 
-    fetch("http://localhost:4000/checkout", {
+    fetch("https://valley-app-server.herokuapp.com/checkout", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -27,7 +27,7 @@ const Checkout = () => {
     })
 
     useEffect(() => {
-        fetch('http://localhost:4000/checkout')
+        fetch('https://valley-app-server.herokuapp.com/checkout')
             .then(res => res.json())
             .then(data => setCheckoutCart(data))
     }, []);
